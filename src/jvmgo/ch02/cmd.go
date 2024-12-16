@@ -9,6 +9,7 @@ import (
 type Cmd struct {
 	helpFlag    bool
 	versionFlag bool
+	XjreOption  string
 	cpOption    string
 	class       string
 	args        []string
@@ -28,6 +29,8 @@ func parseCmd() *Cmd {
 	flag.StringVar(&cmd.cpOption, "classpath", "", "classpath")
 	//-cp
 	flag.StringVar(&cmd.cpOption, "cp", "", "classpath")
+	//-Xjre
+	flag.StringVar(&cmd.XjreOption, "Xjre", "", "path to jre")
 	flag.Parse()
 	args := flag.Args()
 	if len(args) > 0 {
