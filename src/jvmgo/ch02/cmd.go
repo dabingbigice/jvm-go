@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// go build -o ch02
 type Cmd struct {
 	helpFlag    bool
 	versionFlag bool
@@ -32,6 +33,7 @@ func parseCmd() *Cmd {
 	//-Xjre
 	flag.StringVar(&cmd.XjreOption, "Xjre", "", "path to jre")
 	flag.Parse()
+	//获取没有带-参数的所有参数
 	args := flag.Args()
 	if len(args) > 0 {
 		//第一个参数为class
