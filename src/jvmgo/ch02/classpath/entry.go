@@ -28,6 +28,6 @@ func newEntry(path string) Entry {
 		//压缩包的path
 		return newZipEntry(path)
 	}
-
+	//如果都不是上面的，则加载当前文件夹下的
 	return newDirEntry(path)
 }

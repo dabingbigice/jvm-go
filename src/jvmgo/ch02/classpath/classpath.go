@@ -13,18 +13,24 @@ type Classpath struct {
 
 func Parse(jreOption, cpOptin string) *Classpath {
 	cp := &Classpath{}
+	//boot和ext加载器的入口有很多jar包
 	cp.parseBootAndExtClasspath(jreOption)
+	//user加载器就是当前文件夹
 	cp.parseUserClasspath(cpOptin)
 	return cp
 }
 func (self *Classpath) ReadClass(className string) ([]byte, Entry, error) {
 	className += ".class"
+	//判断当前类是否由boot引导器加载
 	if data, entry, err := self.bootClasspath.readClass(className); err == nil {
+		//先使用boot引导器加载
 		return data, entry, err
 	}
 	if data, entry, err := self.extClasspath.readClass(className); err == nil {
+		//再使用ext引导器加载
 		return data, entry, err
 	}
+	//这两个都没加载成功，此时才在当前文件夹下搜索加载
 	return self.userClasspath.readClass(className)
 }
 func (self *Classpath) String() string {

@@ -21,6 +21,7 @@ func newWildcardEntry(path string) CompositeEntry {
 		}
 		return nil
 	}
+	//获取文件夹下面的所有jar包
 	filepath.Walk(baseDir, walkFn)
 	return compositeEntry
 }

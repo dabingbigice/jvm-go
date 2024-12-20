@@ -17,6 +17,7 @@ func newCompositeEntry(pathList string) CompositeEntry {
 	return compositeEntry
 }
 func (self CompositeEntry) readClass(className string) ([]byte, Entry, error) {
+	//遍历boot引导器下所有的entry入口。看这些jar包中是否包含className
 	for _, entry := range self {
 		data, from, err := entry.readClass(className)
 		if err == nil {
